@@ -1115,8 +1115,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: HomePlanet
       objectReference: {fileID: 0}
+    - target: {fileID: 7741791805065116682, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
+      propertyPath: _hasResources
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741791805065116682, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
+      propertyPath: _resourceSprite
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5231993077860633156, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
@@ -1335,25 +1344,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 572653380086658251, guid: 0fed6dcd5a9bb4a499456aa6d9807447, type: 3}
-      propertyPath: m_AngularDamping
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4203604365806683925, guid: 0fed6dcd5a9bb4a499456aa6d9807447, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033938742018963146, guid: 0fed6dcd5a9bb4a499456aa6d9807447, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.62877
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033938742018963146, guid: 0fed6dcd5a9bb4a499456aa6d9807447, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.62877
-      objectReference: {fileID: 0}
-    - target: {fileID: 5033938742018963146, guid: 0fed6dcd5a9bb4a499456aa6d9807447, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.62877
       objectReference: {fileID: 0}
     - target: {fileID: 5033938742018963146, guid: 0fed6dcd5a9bb4a499456aa6d9807447, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1412,17 +1405,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 881859647}
     m_Modifications:
-    - target: {fileID: 5040248052194400651, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.67296
-      objectReference: {fileID: 0}
-    - target: {fileID: 5040248052194400651, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.67296
-      objectReference: {fileID: 0}
-    - target: {fileID: 5040248052194400651, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.67296
+    - target: {fileID: 4735948155383822360, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4735948155383822360, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5040248052194400651, guid: 23c1dac4822f36c4c846c2ad36eee7e3, type: 3}
       propertyPath: m_LocalPosition.x

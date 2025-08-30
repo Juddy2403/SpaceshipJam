@@ -3,6 +3,8 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
     [SerializeField] float _gravityStrength = 9.81f;
+    [SerializeField] SpriteRenderer _resourceSprite;
+    [SerializeField] private bool _hasResources = true;
     private CircleCollider2D _collider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,5 +45,12 @@ public class Planet : MonoBehaviour
         {
             player.Explode();
         }
+    }
+
+    public void HarvestResources()
+    {
+        if (!_hasResources) return;
+        _hasResources = false;
+        _resourceSprite.enabled = false;
     }
 }

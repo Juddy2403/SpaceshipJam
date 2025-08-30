@@ -105,14 +105,21 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Player")) return;
-        var direction = transform.up.normalized;
-        var otherDirection = collision.transform.up.normalized;
-        // Dot product: >0 means facing, <0 means facing away
-        float dot = Vector2.Dot(direction, otherDirection);
-        if (dot < -0.5f) // Adjust threshold as needed (0.5 means roughly within 60 degrees)
+        if (collision.collider.CompareTag("Player"))
         {
-            Explode();
+            var direction = transform.up.normalized;
+            var otherDirection = collision.transform.up.normalized;
+            // Dot product: >0 means facing, <0 means facing away
+            float dot = Vector2.Dot(direction, otherDirection);
+            if (dot < -0.5f) // Adjust threshold as needed (0.5 means roughly within 60 degrees)
+            {
+                Explode();
+            }
+        }
+        Planet planet = collision.collider.GetComponent<Planet>();
+        if (planet != null)
+        {
+            planet.HarvestResources();
         }
     }
 }

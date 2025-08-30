@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Player_IA",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "9bce6009-ca36-40e7-9456-8824f9afacca",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "c61eb156-ee47-4888-a738-24b2bd770a99",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Accelerate",
+                    "type": "Button",
+                    "id": "c3ad6b10-c665-4ef5-8375-d9d86e66eeea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "acb352db-491f-4df5-ae94-7811bfad677c",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cde33e5e-9e80-4c9d-a38d-f63cb3b30462",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

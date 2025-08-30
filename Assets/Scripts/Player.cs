@@ -3,16 +3,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float _speed = 1.5f;
     [SerializeField] private float _maxSpeed = 5f;
     [SerializeField] private float _friction = 2f;
-    [SerializeField] private SatteliteManager _satteliteManager;
     [SerializeField] private float _minLoseControlDistance = 2f;
     [SerializeField] private float _maxLoseControlDistance = 5f;
+    [Header("Actions")]
     [SerializeField] private float _craftingTime = 1f;
     [SerializeField] private float _miningTime = 1f;
     [SerializeField] private SpriteRenderer _resourceSprite;
     [SerializeField] private SpriteRenderer _satteliteSprite;
+    [Header("Score")]
+    [SerializeField] private int _scorePerSattelite = 1;
+
+    private SatteliteManager _satteliteManager;
     private int _playerNumber = 0;
     public int PlayerNumber => _playerNumber;
     private bool _hasResources = false;
@@ -33,6 +38,7 @@ public class Player : MonoBehaviour
         ManageInput();
         _startPosition = transform.position;
         _playerInput.Movement.Reset.performed += ctx => { Explode(); };
+        _satteliteManager = FindFirstObjectByType<SatteliteManager>();
     }
 
     private void ManageInput()
@@ -111,6 +117,7 @@ public class Player : MonoBehaviour
     public void Explode()
     {
         transform.position = _startPosition;
+        if(_hasResources || _hasSattelite) _satteliteManager.AddCurrResourceNum();
         _hasResources = false;
         _resourceSprite.enabled = false;
         _hasSattelite = false;
@@ -155,6 +162,7 @@ public class Player : MonoBehaviour
             _hasSattelite = false;
             _satteliteSprite.enabled = false;
             _satteliteManager.AddSatelite(collision.transform);
+            ScoreManager.Instance.AddScore(_playerNumber, _scorePerSattelite);
             planet.AddSattelite();
             return;
         }

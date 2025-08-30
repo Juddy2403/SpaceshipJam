@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +7,24 @@ public class SatteliteManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform _homePlanet;
+    [SerializeField] private int _resourceNum;
+    private int _currentResourceNum;
     private List<Transform> _sattelites = new();
     public List<Transform> Sattelites => _sattelites;
+    public Action OnGameFinish;
 
     public void AddSatelite(Transform sattelite)
     {
-        if (!_sattelites.Contains(sattelite))
+        _sattelites.Add(sattelite);
+        AddCurrResourceNum();
+    }
+
+    public void AddCurrResourceNum()
+    { 
+        ++_currentResourceNum;
+        if (_currentResourceNum >= _resourceNum)
         {
-            _sattelites.Add(sattelite);
+            OnGameFinish.Invoke();
         }
     }
 
@@ -30,7 +41,7 @@ public class SatteliteManager : MonoBehaviour
                 closest = sattelite;
             }
         }
-        if(closest == null) return _homePlanet;
+        if (closest == null) return _homePlanet;
 
         float distanceToHome = Vector3.Distance(position, _homePlanet.position);
         if (distanceToHome < minDistance)

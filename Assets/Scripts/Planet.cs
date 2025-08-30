@@ -39,8 +39,9 @@ public class Planet : MonoBehaviour
         return true;
     }
 
-    public void AddSattelite()
+    public void AddSattelite(Sprite satteliteSprite)
     {
+        _satteliteSprite.sprite = satteliteSprite;
         _satteliteSprite.enabled = true;
     }
 }

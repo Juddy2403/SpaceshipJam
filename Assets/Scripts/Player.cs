@@ -1,6 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ColorSpriteList
+{
+    public Color color;
+    public List<Sprite> sprites;
+}
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
@@ -16,6 +23,13 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer _satteliteSprite;
     [Header("Score")]
     [SerializeField] private int _scorePerSattelite = 1;
+    [Header("Animation")]
+    [SerializeField] private Animator _fireAnimator;
+    [SerializeField] private GameObject _explosionEffectPrefab;
+    [SerializeField] private List<ColorSpriteList> _playerColorToSpritesList;
+    [SerializeField] private List<ColorSpriteList> _playerColorToSatteliteList;
+    [SerializeField] private SpriteRenderer _rocketSprite;
+
 
     private SatteliteManager _satteliteManager;
     private int _playerNumber = 0;
@@ -39,6 +53,8 @@ public class Player : MonoBehaviour
         _startPosition = transform.position;
         _playerInput.Movement.Reset.performed += ctx => { Explode(); };
         _satteliteManager = FindFirstObjectByType<SatteliteManager>();
+        _rocketSprite.sprite = _playerColorToSpritesList[_playerNumber].sprites[Random.Range(0, _playerColorToSpritesList[_playerNumber].sprites.Count)];
+        _satteliteSprite.sprite = _playerColorToSatteliteList[_playerNumber].sprites[0];
     }
 
     private void ManageInput()
@@ -74,6 +90,7 @@ public class Player : MonoBehaviour
 
         if (moveInput.magnitude >= 0.5f)
         {
+            _fireAnimator.SetBool("IsReceivingInput", true);
             // Lose control if too far from sattelite
             if (distanceToSatelite > _minLoseControlDistance)
             {
@@ -97,6 +114,8 @@ public class Player : MonoBehaviour
         }
         else
         {
+            _fireAnimator.SetBool("IsReceivingInput", false);
+
             // Apply friction to simulate sliding
             if (_rigidBody.linearVelocity.magnitude > 0.1f)
             {
@@ -116,6 +135,7 @@ public class Player : MonoBehaviour
     }
     public void Explode()
     {
+        Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
         transform.position = _startPosition;
         if(_hasResources || _hasSattelite) _satteliteManager.AddCurrResourceNum();
         _hasResources = false;
@@ -163,7 +183,7 @@ public class Player : MonoBehaviour
             _satteliteSprite.enabled = false;
             _satteliteManager.AddSatelite(collision.transform);
             ScoreManager.Instance.AddScore(_playerNumber, _scorePerSattelite);
-            planet.AddSattelite();
+            planet.AddSattelite(_playerColorToSatteliteList[_playerNumber].sprites[0]);
             return;
         }
         if (_hasResources == false)
@@ -190,3 +210,5 @@ public class Player : MonoBehaviour
         _playerInput.Movement.Enable();
     }
 }
+
+

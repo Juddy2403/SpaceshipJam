@@ -59,11 +59,13 @@ public class Player : MonoBehaviour
         _satteliteManager = FindFirstObjectByType<SatteliteManager>();
         _rocketSprite.sprite = _playerColorToSpritesList[_playerNumber].sprites[Random.Range(0, _playerColorToSpritesList[_playerNumber].sprites.Count)];
         _satteliteSprite.sprite = _playerColorToSatteliteList[_playerNumber].sprites[0];
+        _satteliteManager.OnGameFinish += DisableMovement;
     }
 
     private void OnDisable()
     {
         _playerInput.Movement.Reset.performed -= ctx => { Explode(); };
+        _satteliteManager.OnGameFinish -= DisableMovement;
     }
 
     private void ManageInput()
@@ -91,6 +93,10 @@ public class Player : MonoBehaviour
         HandleMovement();
     }
 
+    private void DisableMovement()
+    {
+        _playerInput.Movement.Disable();
+    }
     private void HandleMovement()
     {
         Vector2 moveInput = _playerInput.Movement.Move.ReadValue<Vector2>();
@@ -148,7 +154,7 @@ public class Player : MonoBehaviour
     {
         Instantiate(_explosionEffectPrefab, transform.position, Quaternion.identity);
         transform.position = _startPosition;
-        if(_hasResources || _hasSattelite) _satteliteManager.AddCurrResourceNum();
+        if (_hasResources || _hasSattelite) _satteliteManager.AddCurrResourceNum();
         _hasResources = false;
         _resourceSprite.enabled = false;
         _hasSattelite = false;
@@ -185,7 +191,7 @@ public class Player : MonoBehaviour
         if (planet.IsHomePlanet && _hasResources)
         {
             _playerInput.Movement.Disable();
-            Instantiate(_smokeEffectPrefab, planet.transform.position - Vector3.forward*3, Quaternion.identity);
+            Instantiate(_smokeEffectPrefab, planet.transform.position - Vector3.forward * 3, Quaternion.identity);
             Invoke(nameof(DoneCraftingSattelite), _craftingTime);
             return;
         }
@@ -201,7 +207,7 @@ public class Player : MonoBehaviour
         if (_hasResources == false)
         {
             if (!planet.HarvestResources()) return;
-            Instantiate(_smokeEffectPrefab, planet.transform.position - Vector3.forward*3, Quaternion.identity);
+            Instantiate(_smokeEffectPrefab, planet.transform.position - Vector3.forward * 3, Quaternion.identity);
             Invoke(nameof(DonePickingUpResources), _miningTime);
             _playerInput.Movement.Disable();
         }

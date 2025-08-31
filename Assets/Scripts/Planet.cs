@@ -13,18 +13,34 @@ public class Planet : MonoBehaviour
     [SerializeField] private bool _isHomePlanet = false;
     [SerializeField] private CircleCollider2D _triggerCollider;
     [SerializeField] private CircleCollider2D _collider;
+    private float _planetSpeed;
     public bool IsHomePlanet => _isHomePlanet;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (!_isHomePlanet)
+        {
             _planetSprite.sprite = _possiblePlanetSprites[Random.Range(0, _possiblePlanetSprites.Count)];
+
+            // Randomize scale
+            float scale = Random.Range(0.06f, 0.15f);
+            _planetSprite.transform.localScale = Vector3.one * scale;
+
+            // Set collider radii
+            if (_collider != null)
+                _collider.radius = 4f * scale;
+            if (_triggerCollider != null && _collider != null)
+                _triggerCollider.radius = _collider.radius * 3f;
+        }
+        _planetSpeed = Random.Range(6f, 15f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        // rotate planet slowly
+        _planetSprite.transform.Rotate(Vector3.forward * Time.deltaTime * _planetSpeed);
     }
 
     private void OnTriggerStay2D(Collider2D other)

@@ -17,6 +17,14 @@ public class ScoreManager : Singleton<ScoreManager>
         PlayerColorNames = new List<string> { "Blue", "Red"};
         PlayerColors = new List<Color> { Color.blue, Color.red };
     }
+    public void ResetScores()
+    {
+        for (int i = 0; i < PlayerScores.Count; i++)
+        {
+            PlayerScores[i] = 0;
+        }
+
+    }
 
     // Update is called once per frame
     public void AddScore(int playerNumber, int scoreToAdd)

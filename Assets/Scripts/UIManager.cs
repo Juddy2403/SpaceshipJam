@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnGameEnd()
     {
+        ScoreManager.Instance.ResetScores();
         _restartButton.Select();
         var scores = ScoreManager.Instance.PlayerScores;
         int winner;

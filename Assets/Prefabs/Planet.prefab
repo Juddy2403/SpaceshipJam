@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b166d5b42ff1dca45868af84a1a4b036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravityStrength: 9.81
+  _gravityStrength: 7
   _resourceSprite: {fileID: 4735948155383822360}
   _satteliteSprite: {fileID: 8996857918727120533}
   _planetSprite: {fileID: 5439211195093792334}

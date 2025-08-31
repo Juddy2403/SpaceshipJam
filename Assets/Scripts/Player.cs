@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         _playerInput = new Player_IA();
         _playerInput.Enable();
         _rigidBody = GetComponent<Rigidbody2D>();

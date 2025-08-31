@@ -25,7 +25,6 @@ public class UIManager : MonoBehaviour
     }
     private void OnGameEnd()
     {
-        ScoreManager.Instance.ResetScores();
         _restartButton.Select();
         var scores = ScoreManager.Instance.PlayerScores;
         int winner;
@@ -36,6 +35,8 @@ public class UIManager : MonoBehaviour
             _endMenuText.text = $"Player {ScoreManager.Instance.PlayerColorNames[winner]} Wins!";
         }
         _endMenu.SetActive(true);
+        ScoreManager.Instance.ResetScores();
+
     }
     void OnScoreUpdate(int playerNumber, int newScore)
     {

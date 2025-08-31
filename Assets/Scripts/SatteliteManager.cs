@@ -7,12 +7,18 @@ public class SatteliteManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform _homePlanet;
-    [SerializeField] private int _resourceNum;
+    [SerializeField] private int _resourceNum = 0;
     private int _currentResourceNum;
     private List<Transform> _sattelites = new();
     public List<Transform> Sattelites => _sattelites;
     public Action OnGameFinish;
 
+    void Start()
+    {
+        // find all objects that have Planet in their name and are not the home planet and set resource num accordingly
+        GameObject[] planets = GameObject.FindGameObjectsWithTag("Planet");
+        _resourceNum = planets.Length - 1;
+    }
     public void AddSatelite(Transform sattelite)
     {
         _sattelites.Add(sattelite);

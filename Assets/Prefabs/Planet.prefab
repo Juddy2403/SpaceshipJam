@@ -269,7 +269,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.42
+  m_Radius: 1.2
 --- !u!114 &7741791805065116682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +285,22 @@ MonoBehaviour:
   _gravityStrength: 9.81
   _resourceSprite: {fileID: 4735948155383822360}
   _satteliteSprite: {fileID: 8996857918727120533}
+  _planetSprite: {fileID: 5439211195093792334}
+  _possiblePlanetSprites:
+  - {fileID: 1840435030066992420, guid: b77bd08bb461ff64496c26db90aa40d1, type: 3}
+  - {fileID: -1940275408494461777, guid: 381b59f3979a7694d8f844b4eba02b1b, type: 3}
+  - {fileID: 940474361598248816, guid: 63be671d934c85f4a9a6ebea9fa3dc64, type: 3}
+  - {fileID: -1390050675393427303, guid: 7fe4240e8d60d4e45bb239309829bd29, type: 3}
+  - {fileID: 2572241844467584263, guid: 38da889360c262c4ea18727fc7dc1d19, type: 3}
+  - {fileID: 2519772355537943749, guid: 3ac1e496fe74bc94daf486edfc4a7763, type: 3}
+  - {fileID: 8731146150934298954, guid: 803fd321825429d489e84feaedc58eab, type: 3}
+  - {fileID: 5405459629052314720, guid: bea0a113cce6e7a45820c7c4a5fa25cf, type: 3}
+  - {fileID: -9036709707635865836, guid: df9d8c7c8e473184383b6785a412f424, type: 3}
+  - {fileID: -812977930130667544, guid: 3bdfae1d528b9d44fbfa5796c25d0048, type: 3}
   _hasResources: 1
   _isHomePlanet: 0
+  _triggerCollider: {fileID: 2609791158427154615}
+  _collider: {fileID: 2016272344091994635}
 --- !u!58 &2016272344091994635
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -400,7 +414,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1840435030066992420, guid: b77bd08bb461ff64496c26db90aa40d1, type: 3}
-  m_Color: {r: 0.8679245, g: 0.75225675, b: 0.4462442, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

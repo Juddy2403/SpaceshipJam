@@ -26,9 +26,13 @@ public class Player : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator _fireAnimator;
     [SerializeField] private GameObject _explosionEffectPrefab;
+    [SerializeField] private GameObject _smokeEffectPrefab;
     [SerializeField] private List<ColorSpriteList> _playerColorToSpritesList;
     [SerializeField] private List<ColorSpriteList> _playerColorToSatteliteList;
     [SerializeField] private SpriteRenderer _rocketSprite;
+    [Header("Sound")]
+    [SerializeField] private AudioSource _fireAudioSource;
+
 
 
     private SatteliteManager _satteliteManager;
@@ -55,6 +59,11 @@ public class Player : MonoBehaviour
         _satteliteManager = FindFirstObjectByType<SatteliteManager>();
         _rocketSprite.sprite = _playerColorToSpritesList[_playerNumber].sprites[Random.Range(0, _playerColorToSpritesList[_playerNumber].sprites.Count)];
         _satteliteSprite.sprite = _playerColorToSatteliteList[_playerNumber].sprites[0];
+    }
+
+    private void OnDisable()
+    {
+        _playerInput.Movement.Reset.performed -= ctx => { Explode(); };
     }
 
     private void ManageInput()
@@ -91,6 +100,7 @@ public class Player : MonoBehaviour
         if (moveInput.magnitude >= 0.5f)
         {
             _fireAnimator.SetBool("IsReceivingInput", true);
+            _fireAudioSource.enabled = true;
             // Lose control if too far from sattelite
             if (distanceToSatelite > _minLoseControlDistance)
             {
@@ -115,6 +125,7 @@ public class Player : MonoBehaviour
         else
         {
             _fireAnimator.SetBool("IsReceivingInput", false);
+            _fireAudioSource.enabled = false;
 
             // Apply friction to simulate sliding
             if (_rigidBody.linearVelocity.magnitude > 0.1f)
@@ -174,6 +185,7 @@ public class Player : MonoBehaviour
         if (planet.IsHomePlanet && _hasResources)
         {
             _playerInput.Movement.Disable();
+            Instantiate(_smokeEffectPrefab, planet.transform.position - Vector3.forward*3, Quaternion.identity);
             Invoke(nameof(DoneCraftingSattelite), _craftingTime);
             return;
         }
@@ -189,6 +201,7 @@ public class Player : MonoBehaviour
         if (_hasResources == false)
         {
             if (!planet.HarvestResources()) return;
+            Instantiate(_smokeEffectPrefab, planet.transform.position - Vector3.forward*3, Quaternion.identity);
             Invoke(nameof(DonePickingUpResources), _miningTime);
             _playerInput.Movement.Disable();
         }
